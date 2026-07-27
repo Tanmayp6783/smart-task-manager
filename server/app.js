@@ -3,8 +3,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const connectDB = require("./config/db");
-const taskRoutes = require("./routes/taskRoutes");
+
 const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
 const projectRoutes = require("./routes/projectRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
@@ -15,27 +16,23 @@ connectDB();
 
 const app = express();
 
-const cors = require("cors");
-
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
       "https://smart-task-manager-h1nk.onrender.com",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
-app.options("*", cors());
 app.use(express.json());
+
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-
 
 app.get("/", (req, res) => {
   res.json({
