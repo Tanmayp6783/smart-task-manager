@@ -16,11 +16,13 @@ connectDB();
 
 const app = express();
 
+const cors = require("cors");
+
 app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://smart-task-manager-h1nk.onrender.com",
+      "https://smart-task-manager-r149xs4d2-tanmay-b22c.vercel.app",
     ],
     credentials: true,
   })
